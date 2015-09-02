@@ -36,14 +36,14 @@ bash 'download wof microhood data' do
       #{node[:wof][:meta][:csv]}
     touch #{node[:wof][:data][:did_download]}
   EOH
-  not_if { File.exists?(node[:wof][:data][:did_download]) }
+  not_if { ::File.exists?(node[:wof][:data][:did_download]) }
 end
 
 include_recipe 'java'
 
 include_recipe 'elasticsearch'
 
-unless File.exists?(node[:wof][:pg][:did_setup_db])
+unless ::File.exists?(node[:wof][:pg][:did_setup_db])
   include_recipe 'whosonfirst::setup_postgresql'
   file node[:wof][:pg][:did_setup_db] do
     action :touch
@@ -63,7 +63,7 @@ end
   end
 end
 
-unless File.exists?(node[:wof][:pg][:did_index])
+unless ::File.exists?(node[:wof][:pg][:did_index])
   template node[:wof][:config][:spatial] do
     source 'spatial.cfg.erb'
   end
@@ -75,7 +75,7 @@ unless File.exists?(node[:wof][:pg][:did_index])
   end
 end
 
-unless File.exists?(node[:wof][:es][:did_index])
+unless ::File.exists?(node[:wof][:es][:did_index])
   execute 'index elasticsearch' do
     command "#{node[:wof][:search][:script]} -s #{node[:wof][:data][:path]} -b 2>&1 >>#{node[:wof][:log][:index_es]}"
   end
