@@ -115,3 +115,9 @@ runit_service 'spelunker' do
   default_logger true
   sv_timeout node[:wof][:spelunker][:runit][:svwait]
 end
+
+include_recipe 'nginx'
+nginx_web_app 'spelunker' do
+  template 'spelunker-nginx.erb'
+  application domains: ['spelunker'], ssl_support: false
+end

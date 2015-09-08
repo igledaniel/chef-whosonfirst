@@ -1,0 +1,21 @@
+upstream unicorn_spelunker {
+  server unix:<%= node[:wof][:spelunker][:gunicorn][:socket] %> fail_timeout=0;
+}
+
+server {
+  listen <%= node[:nginx][:port] %>;
+
+  log_format custom '[$time_local] '
+                    '"$request" $status $body_bytes_sent '
+                    '"$http_user_agent"';
+  access_log /var/log/nginx/spelunker-access.log custom;
+
+  location / {
+    proxy_pass http://unicorn_spelunker;
+    proxy_set_header Host $http_host;
+    <%- if node[:nginx][:ssl_header][:enabled] -%>
+    proxy_set_header X-Forwarded-Proto https;
+    <%- end -%>
+  }
+
+}

@@ -71,3 +71,6 @@ default[:wof][:spelunker][:gunicorn][:worker_class] = 'gevent'
 default[:wof][:spelunker][:gunicorn][:worker_processes] = node[:cpu][:total] * 2 + 1
 default[:wof][:spelunker][:gunicorn][:cwd] = "#{node[:wof][:spelunker][:path]}/www"
 default[:wof][:spelunker][:gunicorn][:app_module] = 'server:app'
+
+default[:nginx][:port] = 8080
+default[:nginx][:ssl_header][:enabled] = false
