@@ -1,0 +1,16 @@
+#!/bin/bash
+
+cd <%= node[:wof][:spelunker][:gunicorn][:cwd] %>
+
+exec 2>&1
+PYTHONUNBUFFERED=1 \
+WOF_SPATIAL_DSN=<%= node[:wof][:spelunker][:spatial_dsn] %> \
+WOF_SEARCH_HOST=<%= node[:wof][:spelunker][:es][:host] %> \
+WOF_SEARCH_PORT=<%= node[:wof][:spelunker][:es][:port] %> \
+exec chpst -u <%= node[:wof][:user][:name] %> \
+  /usr/bin/gunicorn \
+    <%= node[:wof][:spelunker][:gunicorn][:app_module] %> \
+    --error-logfile - \
+    --access-logfile - \
+    --access-logformat '<%= node[:wof][:spelunker][:gunicorn][:access_log_format] %>' \
+    -c <%= node[:wof][:spelunker][:gunicorn][:cfg] %>

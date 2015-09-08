@@ -52,7 +52,22 @@ default[:wof][:pg][:user_conn_info].update({
 default[:elasticsearch][:version] = '1.3.3'
 default[:wof][:es][:did_index] = '/var/wof/did-index-elasticsearch'
 
-default[:wof][:config][:spatial] = '/etc/wof/spatial.cfg'
+default[:wof][:cfg][:spatial] = '/etc/wof/spatial.cfg'
 
 default[:wof][:log][:index_pg] = '/var/log/index-postgresql.log'
 default[:wof][:log][:index_es] = '/var/log/index-elasticsearch.log'
+
+default[:wof][:spelunker][:path] = '/opt/wof/spelunker'
+default[:wof][:spelunker][:repository] = 'https://github.com/whosonfirst/whosonfirst-www-spelunker.git'
+default[:wof][:spelunker][:revision] = 'master'
+default[:wof][:spelunker][:es][:host] = 'localhost'
+default[:wof][:spelunker][:es][:port] = 9200
+default[:wof][:spelunker][:runit][:svwait] = 10
+default[:wof][:spelunker][:gunicorn][:access_log_format] = '"%(r)s" %(s)s %(b)s "%(a)s" %(l)s %(T)s'
+default[:wof][:spelunker][:gunicorn][:cfg] = '/etc/wof/gunicorn.cfg'
+default[:wof][:spelunker][:gunicorn][:pid] = '/var/run/wof/spelunker.pid'
+default[:wof][:spelunker][:gunicorn][:socket] = '/var/run/wof/spelunker.socket'
+default[:wof][:spelunker][:gunicorn][:worker_class] = 'gevent'
+default[:wof][:spelunker][:gunicorn][:worker_processes] = node[:cpu][:total] * 2 + 1
+default[:wof][:spelunker][:gunicorn][:cwd] = "#{node[:wof][:spelunker][:path]}/www"
+default[:wof][:spelunker][:gunicorn][:app_module] = 'server:app'

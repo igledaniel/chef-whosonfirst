@@ -1,3 +1,7 @@
+user node[:wof][:user][:name] do
+  only_if { node[:wof][:user][:enabled] }
+end
+
 %w(
   /var/wof/meta
   /var/wof/data
@@ -10,8 +14,8 @@
   end
 end
 
-user node[:wof][:user][:name] do
-  only_if { node[:wof][:user][:enabled] }
+directory '/var/run/wof' do
+  owner node[:wof][:user][:name]
 end
 
 git node[:wof][:tools][:path] do
@@ -64,11 +68,11 @@ end
 end
 
 unless ::File.exists?(node[:wof][:pg][:did_index])
-  template node[:wof][:config][:spatial] do
+  template node[:wof][:cfg][:spatial] do
     source 'spatial.cfg.erb'
   end
   execute 'index postgresql' do
-    command "#{node[:wof][:spatial][:script]} -s #{node[:wof][:data][:path]} -c #{node[:wof][:config][:spatial]} 2>&1 >>#{node[:wof][:log][:index_pg]}"
+    command "#{node[:wof][:spatial][:script]} -s #{node[:wof][:data][:path]} -c #{node[:wof][:cfg][:spatial]} 2>&1 >>#{node[:wof][:log][:index_pg]}"
   end
   file node[:wof][:pg][:did_index] do
     action :touch
@@ -82,4 +86,32 @@ unless ::File.exists?(node[:wof][:es][:did_index])
   file node[:wof][:es][:did_index] do
     action :touch
   end
+end
+
+package 'gunicorn'
+package 'python-gevent'
+
+python_pip 'flask'
+
+gunicorn_config node[:wof][:spelunker][:gunicorn][:cfg] do
+  action :create
+  listen "unix:#{node[:wof][:spelunker][:gunicorn][:socket]}"
+  pid node[:wof][:spelunker][:gunicorn][:pid]
+  worker_class node[:wof][:spelunker][:gunicorn][:worker_class]
+  worker_processes node[:wof][:spelunker][:gunicorn][:worker_processes]
+end
+
+git node[:wof][:spelunker][:path] do
+  repository node[:wof][:spelunker][:repository]
+  revision node[:wof][:spelunker][:revision]
+  notifies :restart, 'runit_service[spelunker]', :delayed
+end
+
+include_recipe 'runit'
+
+runit_service 'spelunker' do
+  action [:enable, :start]
+  log true
+  default_logger true
+  sv_timeout node[:wof][:spelunker][:runit][:svwait]
 end

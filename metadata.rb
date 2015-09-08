@@ -20,6 +20,8 @@ database
 nginx
 java
 elasticsearch
+gunicorn
+runit
 ).each do |x|
   depends x
 end
