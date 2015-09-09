@@ -80,8 +80,16 @@ unless ::File.exists?(node[:wof][:pg][:did_index])
 end
 
 unless ::File.exists?(node[:wof][:es][:did_index])
+  # ensure that elasticsearch service has started
+  service 'elasticsearch' do
+    action :start
+  end
   execute 'index elasticsearch' do
     command "#{node[:wof][:search][:script]} -s #{node[:wof][:data][:path]} -b 2>&1 >>#{node[:wof][:log][:index_es]}"
+    # sometimes it takes a while for elasticsearch to start up the first time
+    # these retries are meant to work around this case
+    retries 3
+    retry_delay 30
   end
   file node[:wof][:es][:did_index] do
     action :touch
