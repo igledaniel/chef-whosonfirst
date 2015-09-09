@@ -49,7 +49,7 @@ default[:wof][:pg][:user_conn_info].update({
   :password => node[:wof][:pg][:password],
 })
 
-default[:elasticsearch][:version] = '1.3.3'
+default[:elasticsearch][:version] = '1.7.1'
 default[:wof][:es][:did_index] = '/var/wof/did-index-elasticsearch'
 
 default[:wof][:cfg][:spatial] = '/etc/wof/spatial.cfg'

@@ -26,19 +26,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     },
     'java' => {
       'install_flavor' => 'oracle',
-      'jdk_version' => '7',
+      'jdk_version' => '8',
       'oracle' => {
         'accept_oracle_download_terms' => 'true'
       },
       'jdk' => {
-        '7' => {
+        '8' => {
           'x86_64' => {
-            'url' => 'http://download.oracle.com/otn-pub/java/jdk/7u51-b13/jdk-7u51-linux-x64.tar.gz',
-            'checksum' => '764f96c4b078b80adaa5983e75470ff2'
+            'url' => 'http://download.oracle.com/otn-pub/java/jdk/8u45-b14/jre-8u45-linux-x64.tar.gz',
+            'checksum' => '6cb35916c59762c1ea6acdb275f93a94'
           }
         }
       }
-    },
+    }
   }
   chef.run_list = [
     'recipe[sudo]',
