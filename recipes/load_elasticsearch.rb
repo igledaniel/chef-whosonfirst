@@ -6,5 +6,6 @@
     # these retries are meant to work around this case
     retries 3
     retry_delay 30
+    timeout node[:wof][:load][:timeout]
   end
 end

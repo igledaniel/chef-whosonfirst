@@ -27,6 +27,9 @@ default[:wof][:meta][:path] = '/var/wof/meta'
 default[:wof][:meta][:csv] = '/var/wof/meta/wof-microhood-latest.csv'
 default[:wof][:meta][:url] = 'https://raw.githubusercontent.com/whosonfirst/whosonfirst-data/master/meta/wof-microhood-latest.csv'
 
+# 8 hour timeout for pg and es data load (seconds)
+default[:wof][:load][:timeout] = 3600 * 8
+
 default[:wof][:data][:path] = '/var/wof/data'
 default[:wof][:data][:repository] = 'https://github.com/whosonfirst/whosonfirst-data.git'
 default[:wof][:data][:revision] = 'master'
