@@ -95,3 +95,4 @@ default[:wof][:spelunker][:static_path] = "#{node[:wof][:spelunker][:path]}/www"
 
 default[:nginx][:port] = 8080
 default[:nginx][:ssl_header][:enabled] = false
+default[:wof][:nginx][:script_name] = ''

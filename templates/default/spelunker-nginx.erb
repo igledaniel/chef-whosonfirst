@@ -10,11 +10,14 @@ server {
                     '"$http_user_agent"';
   access_log /var/log/nginx/spelunker-access.log custom;
 
-  location / {
-    proxy_pass http://unicorn_spelunker;
+  location <%= node[:wof][:nginx][:script_name] %>/ {
+    proxy_pass http://unicorn_spelunker<%= node[:wof][:nginx][:script_name] %>/;
     proxy_set_header Host $http_host;
     <%- if node[:nginx][:ssl_header][:enabled] -%>
     proxy_set_header X-Forwarded-Proto https;
+    <%- end -%>
+    <%- if !node[:wof][:nginx][:script_name].empty? -%>
+    proxy_set_header SCRIPT_NAME <%= node[:wof][:nginx][:script_name] %>;
     <%- end -%>
   }
 
