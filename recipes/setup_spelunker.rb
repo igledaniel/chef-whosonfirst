@@ -16,6 +16,7 @@ gunicorn_config node[:wof][:spelunker][:gunicorn][:cfg] do
   pid node[:wof][:spelunker][:gunicorn][:pid]
   worker_class node[:wof][:spelunker][:gunicorn][:worker_class]
   worker_processes node[:wof][:spelunker][:gunicorn][:worker_processes]
+  notifies :restart, 'runit[spelunker]', :delayed
 end
 
 include_recipe 'nginx'
