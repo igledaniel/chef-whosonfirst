@@ -1,6 +1,6 @@
 name             'whosonfirst'
 maintainer       'mapzen'
-maintainer_email 'aaron@mapzen.com'
+maintainer_email 'rob@mapzen.com'
 license          'All rights reserved'
 description      'Installs/Configures wof data and spelunker locally'
 long_description ''

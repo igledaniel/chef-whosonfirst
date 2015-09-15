@@ -4,7 +4,7 @@ cd <%= node[:wof][:spelunker][:gunicorn][:cwd] %>
 
 exec 2>&1
 PYTHONUNBUFFERED=1 \
-WOF_SPATIAL_DSN=<%= node[:wof][:spelunker][:spatial_dsn] %> \
+WOF_SPATIAL_DSN='<%= node[:wof][:spelunker][:spatial_dsn] %>' \
 WOF_SEARCH_HOST=<%= node[:wof][:spelunker][:es][:host] %> \
 WOF_SEARCH_PORT=<%= node[:wof][:spelunker][:es][:port] %> \
 exec chpst -u <%= node[:wof][:user][:name] %> \

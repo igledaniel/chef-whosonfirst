@@ -43,10 +43,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   chef.run_list = [
     'recipe[sudo]',
     'recipe[ohai]',
-    'recipe[apt]',
-    'recipe[git]',
-    'recipe[python]',
-    'recipe[whosonfirst::setup]',
+    'recipe[whosonfirst::setup_vagrant]',
   ]
   end
 end

@@ -6,22 +6,31 @@ end.run_action(:install)
 %w(
   postgresql::ruby
   postgresql::client
-  postgresql::server
-  postgis
 ).each do |r|
   include_recipe r
+end
+
+if node[:wof][:pg][:setup_user_db][:enabled]
+  %w(
+    postgresql::server
+    postgis
+  ).each do |r|
+    include_recipe r
+  end
 end
 
 postgresql_database_user node[:wof][:pg][:user] do
   connection node[:wof][:pg][:postgres_conn_info]
   password node[:wof][:pg][:password]
   action :create
+  only_if { node[:wof][:pg][:setup_user_db][:enabled] }
 end
 
 postgresql_database node[:wof][:pg][:dbname] do
   connection node[:wof][:pg][:postgres_conn_info]
   owner node[:wof][:pg][:user]
   action :create
+  only_if { node[:wof][:pg][:setup_user_db][:enabled] }
 end
 
 postgresql_database_user node[:wof][:pg][:user] do
@@ -29,6 +38,7 @@ postgresql_database_user node[:wof][:pg][:user] do
   database_name node[:wof][:pg][:dbname]
   privileges [:all]
   action :grant
+  only_if { node[:wof][:pg][:setup_user_db][:enabled] }
 end
 
 %w(postgis hstore postgis_topology).each do |extension|

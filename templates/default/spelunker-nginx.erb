@@ -1,5 +1,5 @@
 upstream unicorn_spelunker {
-  server unix:<%= node[:wof][:spelunker][:gunicorn][:socket] %> fail_timeout=0;
+  server unix:<%= node[:wof][:spelunker][:gunicorn][:socket][:path] %> fail_timeout=0;
 }
 
 server {
