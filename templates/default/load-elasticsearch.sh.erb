@@ -4,6 +4,8 @@
   <%- if node[:wof][reposym][:enabled] -%>
 <%= node[:wof][:search][:script] %> \
     -s <%= node[:wof][reposym][:path] %> \
+    --host <%= node[:wof][:spelunker][:es][:host] %> \
+    --port <%= node[:wof][:spelunker][:es][:port] %> \
     -b \
     2>&1 >><%= node[:wof][:log][:index_es] %>
   <%- end -%>
