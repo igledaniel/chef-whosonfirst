@@ -1,0 +1,10 @@
+#!/bin/bash
+
+<%- [:data, :venue].each do |reposym| -%>
+  <%- if node[:wof][reposym][:enabled] -%>
+<%= node[:wof][:spatial][:script] %> \
+    -s <%= node[:wof][reposym][:path] %> \
+    -c <%= node[:wof][:cfg][:spatial] %> \
+    2>&1 >> <%= node[:wof][:log][:index_pg] %>
+  <%- end -%>
+<%- end -%>

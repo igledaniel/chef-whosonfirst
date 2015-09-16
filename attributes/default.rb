@@ -27,9 +27,6 @@ default[:wof][:meta][:path] = '/var/wof/meta'
 default[:wof][:meta][:csv] = '/var/wof/meta/wof-microhood-latest.csv'
 default[:wof][:meta][:url] = 'https://raw.githubusercontent.com/whosonfirst/whosonfirst-data/master/meta/wof-microhood-latest.csv'
 
-# 8 hour timeout for pg and es data load (seconds)
-default[:wof][:load][:timeout] = 3600 * 8
-
 default[:wof][:data][:path] = '/var/wof/data'
 default[:wof][:data][:repository] = 'https://github.com/whosonfirst/whosonfirst-data.git'
 default[:wof][:data][:revision] = 'master'
@@ -42,6 +39,10 @@ default[:wof][:venue][:path] = '/var/wof/data'
 default[:wof][:venue][:repository] = 'https://github.com/whosonfirst/whosonfirst-venue.git'
 default[:wof][:venue][:revision] = 'master'
 default[:wof][:venue][:enabled] = false
+
+default[:wof][:dataload][:dir] = '/opt/wof/bin'
+default[:wof][:dataload][:pg][:path] = '/opt/wof/bin/load-postgresql.sh'
+default[:wof][:dataload][:es][:path] = '/opt/wof/bin/load-elasticsearch.sh'
 
 default[:postgresql][:password][:postgres] = 'postgres'
 default[:wof][:pg][:user] = 'wof'

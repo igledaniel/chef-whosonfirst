@@ -7,3 +7,21 @@ include_recipe 'whosonfirst::setup_common'
     only_if { node[:wof][reposym][:enabled] }
   end
 end
+
+directory node[:wof][:dataload][:dir] do
+  recursive true
+end
+
+template node[:wof][:cfg][:spatial] do
+  source 'spatial.cfg.erb'
+end
+
+template node[:wof][:dataload][:pg][:path] do
+  source 'load-postgresql.sh.erb'
+  mode '0755'
+end
+
+template node[:wof][:dataload][:es][:path] do
+  source 'load-elasticsearch.sh.erb'
+  mode '0755'
+end

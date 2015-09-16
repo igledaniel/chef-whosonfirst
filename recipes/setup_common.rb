@@ -18,6 +18,7 @@ end
 end
 
 directory node[:wof][:log][:path] do
+  recursive true
   owner node[:wof][:user][:name]
 end
 
