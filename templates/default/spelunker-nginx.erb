@@ -23,7 +23,7 @@ server {
 
   location <%= node[:wof][:spelunker][:nginx][:script_name] %>/static {
     <%- if !node[:wof][:spelunker][:nginx][:script_name].empty? -%>
-    rewrite <%= node[:wof][:spelunker][:nginx][:script_name] %>/(.*) /$1;
+    rewrite <%= node[:wof][:spelunker][:nginx][:script_name] %>/(.*) /$1 break;
     <%- end -%>
     root <%= node[:wof][:spelunker][:static_path] %>;
   }
