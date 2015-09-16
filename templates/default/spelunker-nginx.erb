@@ -11,7 +11,7 @@ server {
   access_log /var/log/nginx/spelunker-access.log custom;
 
   location <%= node[:wof][:spelunker][:nginx][:script_name].empty? ? '/' : node[:wof][:spelunker][:nginx][:script_name] %> {
-    proxy_pass http://unicorn_spelunker<%= node[:wof][:spelunker][:nginx][:script_name] %>/;
+    proxy_pass http://unicorn_spelunker<%= node[:wof][:spelunker][:nginx][:script_name] %>;
     proxy_set_header Host $host;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header X-Scheme $scheme;
