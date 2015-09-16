@@ -73,8 +73,8 @@ default[:wof][:es][:did_index] = '/var/wof/did-index-elasticsearch'
 default[:wof][:cfg][:spatial] = '/etc/wof/spatial.cfg'
 
 default[:wof][:log][:path] = '/var/log/wof'
-default[:wof][:log][:index_pg] = '/var/log/index-postgresql.log'
-default[:wof][:log][:index_es] = '/var/log/index-elasticsearch.log'
+default[:wof][:log][:index_pg] = '/var/log/wof/index-postgresql.log'
+default[:wof][:log][:index_es] = '/var/log/wof/index-elasticsearch.log'
 
 default[:wof][:spelunker][:path] = '/opt/wof/spelunker'
 default[:wof][:spelunker][:repository] = 'https://github.com/whosonfirst/whosonfirst-www-spelunker.git'
