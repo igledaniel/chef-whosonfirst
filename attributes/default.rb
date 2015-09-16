@@ -93,6 +93,5 @@ default[:wof][:spelunker][:gunicorn][:cwd] = "#{node[:wof][:spelunker][:path]}/w
 default[:wof][:spelunker][:gunicorn][:app_module] = 'server:app'
 default[:wof][:spelunker][:static_path] = "#{node[:wof][:spelunker][:path]}/www"
 
-default[:nginx][:port] = 8080
-default[:nginx][:ssl_header][:enabled] = false
-default[:wof][:nginx][:script_name] = ''
+default[:wof][:spelunker][:nginx][:port] = 8080
+default[:wof][:spelunker][:nginx][:script_name] = ''
