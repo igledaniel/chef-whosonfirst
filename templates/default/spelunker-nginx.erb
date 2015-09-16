@@ -17,6 +17,7 @@ server {
     proxy_set_header X-Scheme $scheme;
     <%- if !node[:wof][:spelunker][:nginx][:script_name].empty? -%>
     proxy_set_header SCRIPT_NAME <%= node[:wof][:spelunker][:nginx][:script_name] %>;
+    proxy_set_header X-Script-Name <%= node[:wof][:spelunker][:nginx][:script_name] %>;
     <%- end -%>
   }
 
