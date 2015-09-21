@@ -27,9 +27,13 @@ default[:wof][:meta][:path] = '/var/wof/meta'
 default[:wof][:meta][:csv] = '/var/wof/meta/wof-microhood-latest.csv'
 default[:wof][:meta][:url] = 'https://raw.githubusercontent.com/whosonfirst/whosonfirst-data/master/meta/wof-microhood-latest.csv'
 
+# timeout to sync repo in seconds
+default[:wof][:repo_timeout] = 3600 * 4
+
 default[:wof][:data][:path] = '/var/wof/data'
 default[:wof][:data][:repository] = 'https://github.com/whosonfirst/whosonfirst-data.git'
 default[:wof][:data][:revision] = 'master'
+default[:wof][:data][:timeout] = node[:wof][:repo_timeout]
 default[:wof][:data][:enabled] = false
 # in vagrant run, only download a subset of the data
 default[:wof][:data][:url] = 'http://whosonfirst.mapzen.com/data'
@@ -38,6 +42,7 @@ default[:wof][:data][:did_download] = '/var/wof/did-download-data'
 default[:wof][:venue][:path] = '/var/wof/data'
 default[:wof][:venue][:repository] = 'https://github.com/whosonfirst/whosonfirst-venue.git'
 default[:wof][:venue][:revision] = 'master'
+default[:wof][:venue][:timeout] = node[:wof][:repo_timeout]
 default[:wof][:venue][:enabled] = false
 
 default[:wof][:dataload][:dir] = '/opt/wof/bin'

@@ -5,6 +5,7 @@ include_recipe 'whosonfirst::setup_common'
     repository node[:wof][reposym][:repository]
     revision node[:wof][reposym][:revision]
     only_if { node[:wof][reposym][:enabled] }
+    timeout node[:wof][reposym][:timeout]
   end
 end
 
