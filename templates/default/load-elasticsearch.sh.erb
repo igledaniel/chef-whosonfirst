@@ -8,5 +8,6 @@
     --port <%= node[:wof][:spelunker][:es][:port] %> \
     -b \
     2>&1 >><%= node[:wof][:log][:index_es] %>
+
   <%- end -%>
 <%- end -%>
