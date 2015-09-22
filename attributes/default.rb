@@ -39,7 +39,7 @@ default[:wof][:data][:enabled] = false
 default[:wof][:data][:url] = 'http://whosonfirst.mapzen.com/data'
 default[:wof][:data][:did_download] = '/var/wof/did-download-data'
 
-default[:wof][:venue][:path] = '/var/wof/data'
+default[:wof][:venue][:path] = '/var/wof/venue'
 default[:wof][:venue][:repository] = 'https://github.com/whosonfirst/whosonfirst-venue.git'
 default[:wof][:venue][:revision] = 'master'
 default[:wof][:venue][:timeout] = node[:wof][:repo_timeout]
