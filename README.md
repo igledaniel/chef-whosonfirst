@@ -2,6 +2,6 @@
 
 ## Important
 
-This repo is still being _actively_ used but I would like to deprecate and retire it. So as the opportunity presents itself you should do that and move stuff in to the other `chef-whosonfirst_*` repos.
+THIS REPOSITORY HAS BEEN DEPRECATED AND IS NO LONGER BEING USED. If you're still reading this after, say, May of 2017 you should just delete the repo.
 
-(20160922/thisisaaronland)
+(20170125/thisisaaronland)
